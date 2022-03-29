@@ -1,6 +1,8 @@
 package com.bookstore.server.service.impl;
 
 import com.bookstore.server.entity.Book;
+import com.bookstore.server.exception.ResourceAlreadyExistsException;
+import com.bookstore.server.exception.ResourceNotFoundException;
 import com.bookstore.server.repositoy.BookRepository;
 import com.bookstore.server.service.IBookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +50,7 @@ public class BookServiceImpl implements IBookService {
     public Book findBookByIsbn(String isbn) {
         Book getBook = bookRepository.findByIsbn(isbn);
         if (getBook == null) {
-            //todo:: throw an exception
+            throw new ResourceNotFoundException("Book not fond with provided id: " + isbn);
         }
         return getBook;
     }
@@ -57,7 +59,7 @@ public class BookServiceImpl implements IBookService {
     public Book saveBook(Book book) {
         Book getBook = findBookByIsbn(book.getIsbn());
         if (getBook != null) {
-            //todo:: throw an exception
+            throw new ResourceAlreadyExistsException("Book already exists");
         }
         Book savedBook = bookRepository.save(book);
         return savedBook;
@@ -66,9 +68,6 @@ public class BookServiceImpl implements IBookService {
     @Override
     public Book updateBook(String isbn, Book book) {
         Book getBook = findBookByIsbn(isbn);
-        if (getBook == null) {
-            //todo:: throw an exception
-        }
         getBook.setIsbn(book.getIsbn());
         getBook.setTitle(book.getTitle());
         getBook.setDescription(book.getDescription());
