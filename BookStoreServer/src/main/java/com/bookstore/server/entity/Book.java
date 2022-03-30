@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,7 +37,7 @@ public class Book implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @NotEmpty(message = "edition can not be empty value")
+    @NotBlank(message = "edition can not be empty value")
     @Column(name = "edition")
     private String edition;
 
@@ -44,19 +45,19 @@ public class Book implements Serializable {
     @Column(name = "author")
     private String author;
 
-    @NotEmpty(message = "quantity can not be empty value")
+    @NotNull(message = "quantity can not be null value")
     @Column(name = "quantity")
     private Integer quantity;
 
-    @NotEmpty(message = "price can not be empty value")
+    @NotNull(message = "price can not be empty value")
     @Column(name = "price")
     private Double price;
 
-    @NotEmpty(message = "rating can not be empty value")
+    @NotNull(message = "rating can not be null value")
     @Column(name = "rating")
     private Integer rating;
 
-    @NotEmpty(message = "publishDate can not be empty value")
+    @NotNull(message = "publishDate can not be null value")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "DD-MM-YYYY")
     private Date publishDate;
