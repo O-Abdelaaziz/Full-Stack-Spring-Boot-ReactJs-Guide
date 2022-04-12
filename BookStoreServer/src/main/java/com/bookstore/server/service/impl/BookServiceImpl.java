@@ -57,7 +57,7 @@ public class BookServiceImpl implements IBookService {
 
     @Override
     public Book saveBook(Book book) {
-        Book getBook = findBookByIsbn(book.getIsbn());
+        Book getBook = bookRepository.findByIsbn(book.getIsbn());
         if (getBook != null) {
             throw new ResourceAlreadyExistsException("Book already exists");
         }
