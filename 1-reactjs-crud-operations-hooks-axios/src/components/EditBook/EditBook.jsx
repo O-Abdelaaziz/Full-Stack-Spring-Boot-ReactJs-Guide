@@ -1,18 +1,27 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {useNavigate, useParams} from "react-router-dom";
 import BookService from "../../services/BookService";
-import BookForm from "./BookForm";
-import {useNavigate} from "react-router-dom";
 import {toast, ToastContainer} from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import BookForm from "./BookForm";
 
-const NewBook = () => {
+const EditBook = () => {
+    const {bookIsbn} = useParams();
+    const [book, setBook] = useState(null);
+
+    useEffect(() => {
+        if (bookIsbn) {
+            getBookHandler(bookIsbn);
+        }
+    }, [bookIsbn]);
+
+    const getBookHandler = async (isbn) => {
+        await BookService.getBookByIsbn(isbn).then((response) => {
+            setBook(response.data);
+        });
+    };
     const navigate = useNavigate();
 
-    // const saveBookHandler = (book) => {
-    //   console.log(book);
-    // };
-
-    const OnSaveBookNotify = (book) => {
+    const onUpdateBookNotify = (book) => {
         const savedBook = {
             title: book.titleEnteredValue,
             isbn: book.isbnInputEnteredValue,
@@ -22,25 +31,25 @@ const NewBook = () => {
             quantity: book.quantityEnteredValue,
             rating: book.ratingEnteredValue,
             publishDate: book.publishDateEnteredValue,
-            tags: book.tagsEnteredValue,
             description: book.descriptionEnteredValue,
         };
 
         toast.promise(
-            BookService.saveBook(savedBook)
+            BookService.updateBook(bookIsbn,savedBook)
                 .then((response) => {
                     console.log(response);
                 })
                 .catch((error) => {
-                    console.log(error);
-                }),
+                    console.log("Error "+error );
+                })
+                ,
             {
                 pending: "Loading...",
-                success: "New book has been saved successfully.",
+                success: "book has been updated successfully.",
                 error: (err) => err.response.data.msg,
             }
         );
-    };
+    }
 
     const onGoBack = () => {
         navigate(-1);
@@ -48,7 +57,7 @@ const NewBook = () => {
 
     return (
         <React.Fragment>
-            <BookForm OnSaveBook={OnSaveBookNotify} onCancel={onGoBack}></BookForm>
+            <BookForm OnUpdateBook={onUpdateBookNotify} book={book} onCancel={onGoBack}></BookForm>
             <ToastContainer
                 position="bottom-center"
                 autoClose={5000}
@@ -65,4 +74,4 @@ const NewBook = () => {
     );
 };
 
-export default NewBook;
+export default EditBook;

@@ -6,7 +6,7 @@ const Card = (props) => {
         <div className="col mb-5">
             <div className="card h-100">
                 {/* Product image*/}
-                <img className="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                <img className="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..."/>
                 {/* Product details*/}
                 <div className="card-body p-4">
                     <div className="text-center">
@@ -18,7 +18,14 @@ const Card = (props) => {
                 </div>
                 {/* Product actions*/}
                 <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <div className="text-center"><Link className='btn btn-outline-dark mt-auto' to={`/books/${props.isbn}`}>View details</Link></div>
+                    <div className="text-center">
+                        <Link className='btn btn-outline-info mx-2' to={`/books/${props.isbn}`}><i
+                            className={'bi bi-eye-fill'}></i></Link>
+                        <Link className='btn btn-outline-success' to={`/books/${props.isbn}/edit`}><i
+                            className={'bi bi-pencil-fill'}></i></Link>
+                        <Link className='btn btn-outline-danger mx-2' to={`/books/${props.isbn}`}><i
+                            className={'bi bi-trash-fill'}></i></Link>
+                    </div>
                 </div>
             </div>
         </div>

@@ -4,11 +4,11 @@ import {useNavigate, useParams} from "react-router-dom";
 
 const BookDetails = () => {
     const [book, setBook] = useState(null);
-    const { bookIsbn } = useParams();
+    const {bookIsbn} = useParams();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(bookIsbn){
+        if (bookIsbn) {
             getBookHandler(bookIsbn);
         }
     }, [bookIsbn]);
@@ -19,10 +19,15 @@ const BookDetails = () => {
             setBook(response.data);
         });
     };
+
+    const goBack = () => {
+        navigate(-1);
+    }
     return <React.Fragment>
         <div className="row">
             <div className="col-md-4">
-                <img src="https://via.placeholder.com/400x600.png" className="img-fluid img-thumbnail" alt="book details" />
+                <img src="https://via.placeholder.com/400x600.png" className="img-fluid img-thumbnail"
+                     alt="book details"/>
             </div>
 
             <div className="col-md-8">
@@ -55,6 +60,7 @@ const BookDetails = () => {
 
                 <strong>Tags</strong>
                 <p>{book?.tags}</p>
+                <button className={'btn btn-danger my-2'} onClick={goBack}>Go Back</button>
             </div>
         </div>
     </React.Fragment>;
