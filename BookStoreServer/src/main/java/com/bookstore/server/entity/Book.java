@@ -62,6 +62,5 @@ public class Book implements Serializable {
     @DateTimeFormat(pattern = "DD-MM-YYYY")
     private Date publishDate;
 
-    @ElementCollection
-    private List<String> tags = new ArrayList<>();
+    private String tags;
 }

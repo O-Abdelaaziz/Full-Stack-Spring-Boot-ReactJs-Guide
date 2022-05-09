@@ -39,7 +39,7 @@ public class BooksTableSeeder {
                 book.setPrice(price);
                 book.setRating(fakerData.number().numberBetween(1, 5));
                 book.setPublishDate(fakerData.date().between(parseDate("01-01-2010"), parseDate("01-01-2022")));
-                book.setTags(fakerData.lorem().words(5));
+                book.setTags(fakerData.lorem().words(5).toString());
                 bookRepository.save(book);
             }
         }
