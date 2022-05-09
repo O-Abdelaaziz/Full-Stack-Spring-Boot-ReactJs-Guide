@@ -59,7 +59,6 @@ const NewBook = () => {
                 draggable
                 pauseOnHover
                 theme="dark"
-
             />
         </React.Fragment>
     );
