@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import BookService from "../../services/BookService";
 import Section from "../UI/Section";
 import Card from "../UI/Card";
 
-const Books = () => {
+const Books = (props) => {
     const [bookList, setBookList] = useState([]);
     const navigate = useNavigate();
 
@@ -23,12 +23,22 @@ const Books = () => {
             });
     };
 
+    const onDeleteBook = async (bookIsbn) => {
+        await BookService.deleteBook(bookIsbn)
+            .then((response) => {
+                retrieveBooks();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
     const onNavigate = () => {
-        navigate("/new-book", { replace: true });
+        navigate("/new-book", {replace: true});
     };
 
-    const viewDetailsHandler=(isbn)=>{
-        navigate('/books/'+isbn,{replace:true});
+    const viewDetailsHandler = (isbn) => {
+        navigate('/books/' + isbn, {replace: true});
     }
 
     return (
@@ -38,7 +48,8 @@ const Books = () => {
 
                 <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     {bookList.map((book) => (
-                        <Card key={book.id} title={book.title} price={book.price} isbn={book.isbn} />
+                        <Card key={book.id} title={book.title} price={book.price} isbn={book.isbn}
+                              onDelete={onDeleteBook.bind(null, book.isbn)}/>
                     ))}
                 </div>
             </div>

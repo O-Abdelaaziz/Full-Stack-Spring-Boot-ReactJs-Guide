@@ -1,7 +1,9 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import BookService from "../../services/BookService";
 
 const Card = (props) => {
+
     return (
         <div className="col mb-5">
             <div className="card h-100">
@@ -23,8 +25,8 @@ const Card = (props) => {
                             className={'bi bi-eye-fill'}></i></Link>
                         <Link className='btn btn-outline-success' to={`/books/${props.isbn}/edit`}><i
                             className={'bi bi-pencil-fill'}></i></Link>
-                        <Link className='btn btn-outline-danger mx-2' to={`/books/${props.isbn}`}><i
-                            className={'bi bi-trash-fill'}></i></Link>
+                        <button className='btn btn-outline-danger mx-2' onClick={props.onDelete}><i
+                            className={'bi bi-trash-fill'}></i></button>
                     </div>
                 </div>
             </div>
