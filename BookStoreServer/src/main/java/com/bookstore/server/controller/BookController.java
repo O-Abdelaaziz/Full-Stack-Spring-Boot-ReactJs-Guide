@@ -10,6 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -60,10 +61,12 @@ public class BookController {
     }
 
     @DeleteMapping()
-    public ResponseEntity<HttpStatus> deleteAllBooks() {
+    public ResponseEntity<Map<String, Boolean>> deleteAllBooks() {
         try {
             iBookService.deleteBooks();
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            Map<String, Boolean> response = new HashMap<>();
+            response.put("deleted", true);
+            return new ResponseEntity<>(response,HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

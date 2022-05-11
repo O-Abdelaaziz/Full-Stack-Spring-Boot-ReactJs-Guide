@@ -20,7 +20,7 @@ const bookReducer = (state = initialState, action) => {
         case RETRIEVE_BOOK_BY_ISBN:
             return {...state, book: payload};
         case CREATE_BOOK:
-            return {...state, books: payload};
+            return {...state, payload};
         case UPDATE_BOOK:
             return {
                 ...state, books: state.books.map((book) => {
@@ -37,7 +37,7 @@ const bookReducer = (state = initialState, action) => {
         case DELETE_BOOK:
             return {...state, state: state.books.filter(({isbn}) => isbn !== payload.isbn)};
         case DELETE_ALL_BOOKS:
-            return [];
+            return {...state, books: []};
         default:
             return state;
     }

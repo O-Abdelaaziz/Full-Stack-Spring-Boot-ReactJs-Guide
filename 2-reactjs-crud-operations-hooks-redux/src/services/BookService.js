@@ -21,7 +21,7 @@ const deleteBook = (isbn) => {
 };
 
 const deleteAllBooks = () => {
-    http.delete("/books");
+    return http.delete("/books");
 };
 
 const BookService = {

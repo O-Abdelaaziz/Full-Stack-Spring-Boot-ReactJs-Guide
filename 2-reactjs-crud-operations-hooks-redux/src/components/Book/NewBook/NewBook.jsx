@@ -31,6 +31,7 @@ const NewBook = () => {
                 error: (err) => err.response.data.msg,
             }
         );
+        navigate('/books');
     }
 
     const onGoBack = () => {
