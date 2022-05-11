@@ -13,7 +13,7 @@ const BooksList = () => {
 
     useEffect(() => {
         dispatch(retrieveBooks());
-    }, []);
+    }, [dispatch]);
 
     const dataTable = () => {
         return books.map((res, i) => {
