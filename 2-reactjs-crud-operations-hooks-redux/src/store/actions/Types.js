@@ -1,0 +1,6 @@
+export const RETRIEVE_BOOKS = "RETRIEVE_BOOKS";
+export const RETRIEVE_BOOK_BY_ISBN = "RETRIEVE_BOOK_BY_ISBN";
+export const CREATE_BOOK = "CREATE_BOOK";
+export const UPDATE_BOOK = "UPDATE_BOOK";
+export const DELETE_BOOK = "DELETE_BOOK";
+export const DELETE_ALL_BOOKS = "DELETE_ALL_BOOKS";
