@@ -6,8 +6,8 @@ import './App.css';
 import {Navigate, Route, Routes} from "react-router-dom";
 import Books from "./components/Books/Books";
 import BookDetails from "./components/BookDetails/BookDetails";
-import NewBook from "./components/NewBook/NewBook";
-import EditBook from "./components/EditBook/EditBook";
+import NewBook from "./components/Book/NewBook/NewBook";
+import EditBook from "./components/Book/EditBook/EditBook";
 
 function App() {
   return (

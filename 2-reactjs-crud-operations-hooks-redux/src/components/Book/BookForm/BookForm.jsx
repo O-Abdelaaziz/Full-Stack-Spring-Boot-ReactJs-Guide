@@ -1,9 +1,70 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 const BookForm = (props) => {
 
+    //region Init
+    const [title, setTitle] = useState(props.book ? props.book.title : '');
+    const [isbn, setIsbn] = useState(props.book ? props.book.isbn : '');
+    const [description, setDescription] = useState(props.book ? props.book.description : '');
+    const [edition, setEdition] = useState(props.book ? props.book.edition : '');
+    const [author, setAuthor] = useState(props.book ? props.book.author : '');
+    const [quantity, setQuantity] = useState(props.book ? props.book.quantity : '');
+    const [price, setPrice] = useState(props.book ? props.book.price : '');
+    const [rating, setRating] = useState(props.book ? props.book.rating : '');
+    const [publishDate, setPublishDate] = useState(props.book ? props.book.publishDate : '');
+    const [tags, setTags] = useState(props.book ? props.book.tags : '');
+    //endregion
+
+    //region Description
+    const titleInputChangeHandler = (event) => {
+        setTitle(event.target.value);
+    }
+    const isbnInputChangeHandler = (event) => {
+        setIsbn(event.target.value);
+    }
+    const descriptionInputChangeHandler = (event) => {
+        setDescription(event.target.value);
+    }
+    const editionInputChangeHandler = (event) => {
+        setEdition(event.target.value);
+    }
+    const authorInputChangeHandler = (event) => {
+        setAuthor(event.target.value);
+    }
+    const quantityInputChangeHandler = (event) => {
+        setQuantity(event.target.value);
+    }
+    const priceInputChangeHandler = (event) => {
+        setPrice(event.target.value);
+    }
+    const ratingInputChangeHandler = (event) => {
+        setRating(event.target.value);
+    }
+    const publishDateInputChangeHandler = (event) => {
+        setPublishDate(event.target.value);
+    }
+    const tagsInputChangeHandler = (event) => {
+        setTags(event.target.value);
+    }
+    //endregion
+
     const fromSubmitHandler = (event) => {
         event.preventDefault();
+
+        const book = {
+            titleEnteredValue: title,
+            isbnEnteredValue: isbn,
+            authorEnteredValue: author,
+            editionEnteredValue: edition,
+            priceEnteredValue: price,
+            quantityEnteredValue: quantity,
+            ratingEnteredValue: rating,
+            publishDateEnteredValue: publishDate,
+            tagsEnteredValue: tags,
+            descriptionEnteredValue: description,
+        }
+
+        props.onSaveBook(book);
     };
 
     return (
@@ -14,11 +75,14 @@ const BookForm = (props) => {
                         <div className="from-group">
                             <label htmlFor="title">Title:</label>
                             <input
+                                autoFocus
                                 type="text"
                                 id="title"
                                 className="form-control"
                                 placeholder="title..."
                                 required
+                                value={title}
+                                onChange={titleInputChangeHandler}
                             />
                         </div>
                     </div>
@@ -34,6 +98,8 @@ const BookForm = (props) => {
                                 className="form-control"
                                 placeholder="isbn..."
                                 required
+                                value={isbn}
+                                onChange={isbnInputChangeHandler}
                             />
                         </div>
                     </div>
@@ -51,6 +117,8 @@ const BookForm = (props) => {
                                         className="form-control"
                                         placeholder="author..."
                                         required
+                                        value={author}
+                                        onChange={authorInputChangeHandler}
                                     />
                                 </div>
                             </div>
@@ -63,6 +131,8 @@ const BookForm = (props) => {
                                         id="edition"
                                         className="form-control"
                                         placeholder="edition..."
+                                        value={edition}
+                                        onChange={editionInputChangeHandler}
                                     />
                                 </div>
                             </div>
@@ -81,6 +151,8 @@ const BookForm = (props) => {
                                         id="price"
                                         className="form-control"
                                         placeholder="price..."
+                                        value={price}
+                                        onChange={priceInputChangeHandler}
                                     />
                                 </div>
                             </div>
@@ -93,6 +165,8 @@ const BookForm = (props) => {
                                         id="quantity"
                                         className="form-control"
                                         placeholder="quantity..."
+                                        value={quantity}
+                                        onChange={quantityInputChangeHandler}
                                     />
                                 </div>
                             </div>
@@ -112,6 +186,8 @@ const BookForm = (props) => {
                                         className="form-control"
                                         placeholder="rating..."
                                         required
+                                        value={rating}
+                                        onChange={ratingInputChangeHandler}
                                     />
                                 </div>
                             </div>
@@ -124,6 +200,8 @@ const BookForm = (props) => {
                                         id="publishDate"
                                         className="form-control"
                                         placeholder="publish date..."
+                                        value={publishDate}
+                                        onChange={publishDateInputChangeHandler}
                                     />
                                 </div>
                             </div>
@@ -141,6 +219,8 @@ const BookForm = (props) => {
                                 required
                                 className="form-control"
                                 placeholder="tags..."
+                                value={tags}
+                                onChange={tagsInputChangeHandler}
                             />
 
                         </div>
@@ -156,6 +236,8 @@ const BookForm = (props) => {
                                 id="description"
                                 className="form-control"
                                 placeholder="description..."
+                                value={description}
+                                onChange={descriptionInputChangeHandler}
                             />
                         </div>
                     </div>
