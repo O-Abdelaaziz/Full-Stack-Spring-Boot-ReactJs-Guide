@@ -6,18 +6,15 @@ import {useDispatch, useSelector} from "react-redux";
 import BookForm from "../BookForm/BookForm";
 
 const EditBook = () => {
-    const book = useSelector(state => state.books.book);
     const dispatch = useDispatch();
     const {bookIsbn} = useParams();
+    // const book = useSelector(state => state.books.books.find(book => book.isbn === bookIsbn));
+    const book = useSelector(state => state.books.book);
     const navigate = useNavigate();
-
-    const onGoBack = () => {
-        navigate(-1);
-    };
 
     useEffect(() => {
         dispatch(retrieveBookByIsbn(bookIsbn));
-    }, [])
+    }, []);
 
     const onUpdateBook = (book) => {
 
@@ -34,7 +31,7 @@ const EditBook = () => {
             description: book.descriptionEnteredValue,
         }
 
-        toast().promise(
+        toast.promise(
             dispatch(updateBook(bookIsbn, updatedBook)),
             {
                 pending: "Loading...",
@@ -43,6 +40,10 @@ const EditBook = () => {
             }
         );
     }
+
+    const onGoBack = () => {
+        navigate(-1);
+    };
 
     return (
         <React.Fragment>
@@ -62,5 +63,4 @@ const EditBook = () => {
         </React.Fragment>
     );
 };
-
 export default EditBook;

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {deleteBooks, retrieveBooks} from "../../store/actions/BookActions";
@@ -11,9 +11,13 @@ const BooksList = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    useEffect(() => {
+    const retrieveAllBooks = useCallback(()=>{
         dispatch(retrieveBooks());
-    }, [dispatch]);
+    },[dispatch]);
+
+    useEffect(() => {
+        retrieveAllBooks();
+    }, [retrieveAllBooks]);
 
     const dataTable = () => {
         return books.map((res, i) => {
@@ -41,6 +45,7 @@ const BooksList = () => {
             <div className="container px-4 px-lg-5 mt-5">
                 <button className="btn btn-primary my-2" onClick={onNavigate}>Add new book</button>
                 <button className="btn btn-danger mx-2"  onClick={removeAllBooks}>Remove All</button>
+                <button className="btn btn-success mx-2"  onClick={retrieveAllBooks}>Refresh</button>
 
                 <div className="row col-md-12 justify-content-center">
                     <div className={'table-wrapper'}>
