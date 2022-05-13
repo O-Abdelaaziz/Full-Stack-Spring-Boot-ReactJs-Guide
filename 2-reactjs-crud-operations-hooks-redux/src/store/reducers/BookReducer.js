@@ -16,11 +16,11 @@ const bookReducer = (state = initialState, action) => {
     const {type, payload} = action;
     switch (type) {
         case RETRIEVE_BOOKS:
-            return {...state, books: payload};
+            return {...state, book: {}, books: payload};
         case RETRIEVE_BOOK_BY_ISBN:
             return {...state, book: payload};
         case CREATE_BOOK:
-            return {...state, payload};
+            return {...state, ...state.books, payload};
         case UPDATE_BOOK:
             return {
                 ...state, books: state.books.map((book) => {

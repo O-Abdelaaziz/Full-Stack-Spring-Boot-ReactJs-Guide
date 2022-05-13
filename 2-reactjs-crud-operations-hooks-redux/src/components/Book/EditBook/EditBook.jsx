@@ -8,13 +8,12 @@ import BookForm from "../BookForm/BookForm";
 const EditBook = () => {
     const dispatch = useDispatch();
     const {bookIsbn} = useParams();
-    // const book = useSelector(state => state.books.books.find(book => book.isbn === bookIsbn));
     const book = useSelector(state => state.books.book);
     const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(retrieveBookByIsbn(bookIsbn));
-    }, []);
+    }, [dispatch,bookIsbn]);
 
     const onUpdateBook = (book) => {
 
