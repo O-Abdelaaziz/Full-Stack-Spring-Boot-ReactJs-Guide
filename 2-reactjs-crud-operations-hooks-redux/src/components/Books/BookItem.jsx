@@ -24,8 +24,9 @@ const BookItem = (props) => {
             <td>{description}</td>
             <td>{edition}</td>
             <td>
-                <Link className="btn btn-success" to={"/books/" + isbn + "/edit"}>Edit</Link>
-                <button className={'btn btn-danger'} onClick={removeBook}>Remove</button>
+                <Link className="btn btn-info" to={"/books/" + isbn }><i className="bi bi-eye-fill"></i></Link>
+                <Link className="btn btn-success" to={"/books/" + isbn + "/edit"}><i className="bi bi-pencil-fill"></i></Link>
+                <button className={'btn btn-danger'} onClick={removeBook}><i className="bi bi-trash-fill"></i></button>
             </td>
         </tr>
     );
